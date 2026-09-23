@@ -40,6 +40,69 @@ namespace OOP05G03
             //3)دالة بنكتب اسمها(إعلانها) في ملف، وبنكتب الكود اللي بتنفذه في ملف تاني لنفس الكلاس
             //4)الفيجوال ستوديو بيمسحها خالص وهو بيترجم الكود وما بيديناش أي خطأ(Error) ولا بتأثر على البرنامج
             #endregion
+
+            #region 11
+            DeliveryUtilities.PrintSystemTitle("Smart Delivery Management System");
+
+            DeliveryUtilities.PrintSystemTitle("Creating Shipments...");
+            Shipment s1 = new Shipment("SH001", "Standard", 3, "Cairo");
+            Shipment s2 = new Shipment("SH002", "Express", 2, "Cairo");
+            Shipment s3 = new Shipment("SH003", "International", 8, "Cairo");
+
+            Console.WriteLine($"Total Shipments Created : {Shipment.GetTotalShipmentsCreated()}");
+
+            DeliveryUtilities.PrintSystemTitle("Object Copying");
+            Shipment assignedShipment = s1;
+            Console.WriteLine($"Original Shipment  : {s1.TrackingCode}");
+            Console.WriteLine($"Assigned Shipment  : {assignedShipment.TrackingCode}");
+            Console.WriteLine($"Same Object : {ReferenceEquals(s1, assignedShipment)}");
+
+            DeliveryUtilities.PrintSeparator();
+            Console.WriteLine("Shallow Copy");
+            DeliveryUtilities.PrintSeparator();
+
+            Shipment shallowCopy = s1.ShallowCopy();
+            Console.WriteLine($"Original Shipment Address : {s1.Address.City}");
+            Console.WriteLine($"Copied Shipment Address   : {shallowCopy.Address.City}");
+
+            Console.WriteLine("Changing copied shipment address...");
+            shallowCopy.Address.City = "Giza";
+
+            Console.WriteLine($"Original Shipment Address : {s1.Address.City}");
+            Console.WriteLine($"Copied Shipment Address   : {shallowCopy.Address.City}");
+            Console.WriteLine($"Same DeliveryAddress Object : {ReferenceEquals(s1.Address, shallowCopy.Address)}");
+
+            s1.Address.City = "Cairo";
+
+            DeliveryUtilities.PrintSeparator();
+            Console.WriteLine("Deep Copy");
+            DeliveryUtilities.PrintSeparator();
+
+            Shipment deepCopy = s1.DeepCopy();
+            Console.WriteLine($"Original Shipment Address : {s1.Address.City}");
+            Console.WriteLine($"Copied Shipment Address   : {deepCopy.Address.City}");
+
+            Console.WriteLine("Changing copied shipment address...");
+            deepCopy.Address.City = "Giza";
+
+            Console.WriteLine($"Original Shipment Address : {s1.Address.City}");
+            Console.WriteLine($"Copied Shipment Address   : {deepCopy.Address.City}");
+            Console.WriteLine($"Same DeliveryAddress Object : {ReferenceEquals(s1.Address, deepCopy.Address)}");
+
+            DeliveryUtilities.PrintSystemTitle("Extension Methods");
+            s2.UpdateTrackingStatus("Out For Delivery");
+            s3.UpdateTrackingStatus("Delivered");
+
+            Console.WriteLine(s1.GetSummary());
+            Console.WriteLine(s2.GetSummary());
+            Console.WriteLine(s3.GetSummary());
+
+            Console.WriteLine($"SH001 Is Delivered : {s1.IsDelivered()}");
+            Console.WriteLine($"SH003 Is Delivered : {s3.IsDelivered()}");
+
+            DeliveryUtilities.PrintSystemTitle("Assignment Completed");
         }
+            #endregion
     }
+    
 }

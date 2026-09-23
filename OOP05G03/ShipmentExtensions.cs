@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OOP05G03
 {
-    internal class ShipmentExtensions
+    internal static class ShipmentExtensions
     {
         public static string GetSummary(this Shipment shipment)
         {
